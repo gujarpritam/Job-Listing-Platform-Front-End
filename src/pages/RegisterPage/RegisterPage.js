@@ -18,7 +18,7 @@ function RegisterPage() {
         <img
           src={authBG}
           style={{ maxHeight: "100%", width: "100%" }}
-          alt="Login cover"
+          alt="Register cover"
         />
         <h1
           style={{
