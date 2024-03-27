@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Register.module.css";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../apis/auth";
 
 function Register() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function Register() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       !formData.email ||
       !formData.password ||
@@ -33,7 +34,7 @@ function Register() {
       return;
     }
 
-    alert("User registered successfully");
+    await registerUser(formData);
   };
 
   return (
