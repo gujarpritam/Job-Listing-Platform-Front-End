@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Already have an account ?</h1>
@@ -27,7 +30,7 @@ function Login() {
         Don&apos;t have an account?
         <span
           className={styles.underline}
-          // onClick={() => navigate("/register")}
+          onClick={() => navigate("/register")}
         >
           Sign Up
         </span>
