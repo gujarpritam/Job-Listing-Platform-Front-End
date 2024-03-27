@@ -1,9 +1,28 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../apis/auth";
 
 function Login() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const handleFormChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.email || !formData.password) {
+      alert("Fields can't be empty");
+      return;
+    }
+
+    const result = await loginUser(formData);
+
+    if (result) {
+      navigate("/");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -13,7 +32,7 @@ function Login() {
         className={styles.input}
         name="email"
         // value={formData.email}
-        // onChange={handleFormChange}
+        onChange={handleFormChange}
         type={"email"}
         placeholder="Email"
       ></input>
@@ -21,11 +40,13 @@ function Login() {
         className={styles.input}
         name="password"
         // value={formData.password}
-        // onChange={handleFormChange}
+        onChange={handleFormChange}
         type={"password"}
         placeholder="Password"
       ></input>
-      <button className={styles.button}>Sign in</button>
+      <button onClick={() => handleSubmit()} className={styles.button}>
+        Sign in
+      </button>
       <p className={styles.footer}>
         Don&apos;t have an account?
         <span
