@@ -1,8 +1,9 @@
 import axios from "axios";
+const backendUrl = `http://localhost:4000/api/v1`;
 
 export const registerUser = async ({ email, password, mobile, name }) => {
   try {
-    const reqUrl = "http://localhost:4000/api/v1/auth/register";
+    const reqUrl = `${backendUrl}/auth/register`;
 
     const response = axios.post(reqUrl, { email, password, mobile, name });
 
@@ -15,7 +16,7 @@ export const registerUser = async ({ email, password, mobile, name }) => {
 
 export const loginUser = async ({ email, password }) => {
   try {
-    const reqUrl = "http://localhost:4000/api/v1/auth/login";
+    const reqUrl = `${backendUrl}/auth/login`;
 
     const response = await axios.post(reqUrl, { email, password });
 

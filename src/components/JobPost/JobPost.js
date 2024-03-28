@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./JobPost.module.css";
 import { DEFAULT_SKILLS } from "../../utils/constant";
+import { createJobPost } from "../../apis/job";
 
 export default function JobPost() {
   const [formData, setFormData] = useState({
@@ -47,7 +48,7 @@ export default function JobPost() {
     setFormData({ ...formData, skills: filteredSkills });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       !formData.companyName ||
       !formData.logoUrl ||
@@ -65,6 +66,8 @@ export default function JobPost() {
       alert("Please fill in all fields");
       return;
     }
+
+    await createJobPost(formData);
   };
 
   return (
