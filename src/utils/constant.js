@@ -1,0 +1,15 @@
+export const DEFAULT_SKILLS = [
+  "HTML",
+  "CSS",
+  "JS",
+  "React",
+  "Express.js",
+  "Node.js",
+  "MongoDB",
+  "Tailwind",
+  "Bootstrap",
+  "WordPress",
+  "Java",
+  "OS",
+  "C",
+];
