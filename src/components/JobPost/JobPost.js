@@ -23,9 +23,9 @@ export default function JobPost() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  // useEffect(() => {
+  //   console.log(formData);
+  // }, [formData]);
 
   const addSkills = (event) => {
     const skill = event.target.value;

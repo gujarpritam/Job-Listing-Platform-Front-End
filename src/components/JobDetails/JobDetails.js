@@ -8,6 +8,7 @@ function JobDetails() {
   const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [isEditable, setIsEditable] = useState(false);
   // const isEditable = false;
 
   useEffect(() => {
@@ -18,7 +19,8 @@ function JobDetails() {
   const fetchJobDetails = async () => {
     if (!id) return;
     const result = await getJobPostById(id);
-    setJobDetails(result.data);
+    setJobDetails(result.jobDetails);
+    setIsEditable(result.isEditable);
   };
 
   const logout = () => {
@@ -81,7 +83,7 @@ function JobDetails() {
                 </div>
               </div>
               <div>
-                {isLoggedIn && (
+                {isLoggedIn && isEditable && (
                   <button
                     onClick={() => {
                       navigate("/job-post", {
