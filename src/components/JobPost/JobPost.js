@@ -196,7 +196,7 @@ export default function JobPost() {
 
         <div className={styles.formGroup}>
           <label className={styles.label} htmlFor="description">
-            Description:
+            Job Description:
           </label>
           <textarea
             className={styles.input}
@@ -209,7 +209,7 @@ export default function JobPost() {
 
         <div className={styles.formGroup}>
           <label className={styles.label} htmlFor="about">
-            About:
+            About Company:
           </label>
           <textarea
             className={styles.input}
@@ -222,7 +222,7 @@ export default function JobPost() {
 
         <div className={styles.formGroup}>
           <label className={styles.label} htmlFor="skills">
-            Information:
+            Additional Information:
           </label>
           <input
             className={styles.input}
