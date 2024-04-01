@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./JobPost.module.css";
 import { DEFAULT_SKILLS } from "../../utils/constant";
-import { createJobPost } from "../../apis/job";
+import { createJobPost, updateJobPostById } from "../../apis/job";
 
 export default function JobPost() {
+  const { state } = useLocation();
+  const [stateData, setStateData] = useState(state?.jobDetails);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    companyName: "",
-    logoUrl: "",
-    title: "",
-    description: "",
-    salary: "",
-    location: "",
-    duration: "",
-    locationType: "",
-    skills: [],
-    information: "",
-    jobType: "",
-    about: "",
+    companyName: "" || stateData?.companyName,
+    logoUrl: "" || stateData?.logoUrl,
+    title: "" || stateData?.title,
+    description: "" || stateData?.description,
+    salary: "" || stateData?.salary,
+    location: "" || stateData?.location,
+    duration: "" || stateData?.duration,
+    locationType: "" || stateData?.locationType,
+    skills: stateData?.skills || [],
+    information: "" || stateData?.information,
+    jobType: "" || stateData?.jobType,
+    about: "" || stateData?.about,
   });
 
   const handleChange = (event) => {
@@ -67,7 +72,13 @@ export default function JobPost() {
       return;
     }
 
+    if (state?.edit) {
+      await updateJobPostById(stateData?._id, formData);
+      navigate("/");
+      return;
+    }
     await createJobPost(formData);
+    navigate("/");
   };
 
   return (
@@ -264,8 +275,7 @@ export default function JobPost() {
       </div>
 
       <button onClick={handleSubmit} className={styles.add}>
-        Add Job
-        {/* {state?.edit ? "Edit Job" : "+ Add Job "} */}
+        {state?.edit ? "Edit Job" : "+ Add Job "}
       </button>
       <button className={styles.cancel}>Cancel</button>
     </div>

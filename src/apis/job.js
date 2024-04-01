@@ -26,3 +26,33 @@ export const getJobPostById = async (jobPostId) => {
     console.log(error);
   }
 };
+
+export const updateJobPostById = async (jobPostId, updatedFormData) => {
+  try {
+    const reqUrl = `${backendUrl}/job/update/${jobPostId}`;
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = token;
+    const response = await axios.put(reqUrl, updatedFormData);
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllJobs = async (filter) => {
+  try {
+    const reqUrl = `${backendUrl}/job/all?title=${filter?.title || ""}&skills=${
+      filter?.skills || ""
+    }`;
+
+    const response = await axios.get(reqUrl);
+
+    console.log(typeof response);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
