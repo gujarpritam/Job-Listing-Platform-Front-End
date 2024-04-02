@@ -1,5 +1,6 @@
 body {
   background-color: #ffefef;
+  overflow-y: scroll;
 }
 
 .nav {
@@ -10,6 +11,7 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 2vw;
+
   box-sizing: border-box;
   align-items: center;
 }

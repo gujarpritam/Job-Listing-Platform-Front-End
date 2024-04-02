@@ -7,20 +7,22 @@ function JobDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
   // const isEditable = false;
 
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem("token"));
+    let token = !!localStorage.getItem("token");
+    setIsLoggedIn(token);
+
     fetchJobDetails();
   }, []);
 
   const fetchJobDetails = async () => {
     if (!id) return;
     const result = await getJobPostById(id);
-    setJobDetails(result.jobDetails);
-    setIsEditable(result.isEditable);
+    setJobDetails(result?.jobDetails);
+    setIsEditable(result?.isEditable);
   };
 
   const logout = () => {
@@ -41,8 +43,18 @@ function JobDetails() {
                 </button>
               ) : (
                 <>
-                  <button className={styles.login}>Login</button>
-                  <button className={styles.register}>Register</button>
+                  <button
+                    className={styles.login}
+                    onClick={() => navigate("/login")}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className={styles.register}
+                    onClick={() => navigate("/register")}
+                  >
+                    Register
+                  </button>
                 </>
               )}
             </div>
@@ -58,7 +70,7 @@ function JobDetails() {
             <div className={styles.preHeading}>
               <p className={styles.lightText}>
                 {jobDetails?.companyName}&nbsp;&nbsp; • &nbsp;&nbsp;
-                {jobDetails.jobType}
+                {jobDetails?.jobType}
               </p>
             </div>
 
@@ -77,9 +89,9 @@ function JobDetails() {
                     }}
                     className={styles.boldText}
                   >
-                    {jobDetails.title}
+                    {jobDetails?.title}
                   </p>
-                  <p className={styles.locationText}>{jobDetails.location}</p>
+                  <p className={styles.locationText}>{jobDetails?.location}</p>
                 </div>
               </div>
               <div>
@@ -111,18 +123,10 @@ function JobDetails() {
                     width: "10vw",
                   }}
                 >
-                  <span
-                    style={{
-                      color: "gray",
-                    }}
-                    class="material-symbols-outlined"
-                  >
-                    universal_currency_alt
-                  </span>
                   <p className={styles.lightText}>Stipend</p>
                 </div>
                 <p className={styles.lightText2}>
-                  Rs.{jobDetails.salary}/month
+                  Rs.{jobDetails?.salary}/month
                 </p>
               </div>
               <div>
@@ -134,32 +138,23 @@ function JobDetails() {
                     width: "10vw",
                   }}
                 >
-                  <span
-                    style={{
-                      color: "gray",
-                    }}
-                    class="material-symbols-outlined"
-                  >
-                    calendar_today
-                  </span>
-
                   <p className={styles.lightText}>Duration</p>
                 </div>
 
-                <p className={styles.lightText2}>{jobDetails.duration}</p>
+                <p className={styles.lightText2}>{jobDetails?.duration}</p>
               </div>
             </div>
 
             {/* About Company */}
             <div className={styles.info}>
               <h2>About Company</h2>
-              <p className={styles.lightText}>{jobDetails.about}</p>
+              <p className={styles.lightText}>{jobDetails?.about}</p>
             </div>
 
             {/* About Job/Internship */}
             <div className={styles.info}>
               <h2>About Job/Internship</h2>
-              <p className={styles.lightText}>{jobDetails.description}</p>
+              <p className={styles.lightText}>{jobDetails?.description}</p>
             </div>
 
             {/* skills Required */}
@@ -177,7 +172,7 @@ function JobDetails() {
             {/* Additional Information */}
             <div className={styles.info}>
               <h2>Additional Information</h2>
-              <p className={styles.lightText}>{jobDetails.information}</p>
+              <p className={styles.lightText}>{jobDetails?.information}</p>
             </div>
           </div>
         </div>

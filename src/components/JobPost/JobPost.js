@@ -7,6 +7,7 @@ import { createJobPost, updateJobPostById } from "../../apis/job";
 export default function JobPost() {
   const { state } = useLocation();
   const [stateData, setStateData] = useState(state?.jobDetails);
+  console.log("state", state?.jobDetails?._id);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -28,13 +29,9 @@ export default function JobPost() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  // useEffect(() => {
-  //   console.log(formData);
-  // }, [formData]);
-
   const addSkills = (event) => {
     const skill = event.target.value;
-    console.log(skill);
+
     const actualSkillList = formData.skills;
     const filteredSkills = actualSkillList.filter(
       (element) => element === skill
@@ -277,7 +274,12 @@ export default function JobPost() {
       <button onClick={handleSubmit} className={styles.add}>
         {state?.edit ? "Edit Job" : "+ Add Job "}
       </button>
-      <button className={styles.cancel}>Cancel</button>
+      <button
+        onClick={() => navigate(`/job-details/${state?.jobDetails?._id}`)}
+        className={styles.cancel}
+      >
+        Cancel
+      </button>
     </div>
   );
 }

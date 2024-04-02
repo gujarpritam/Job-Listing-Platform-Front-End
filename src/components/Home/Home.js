@@ -10,6 +10,7 @@ function Home() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [skills, setSkills] = useState([]);
   const [title, setTitle] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const logout = () => {
     localStorage.clear();
@@ -24,6 +25,9 @@ function Home() {
   };
 
   useEffect(() => {
+    let token = !!localStorage.getItem("token");
+    setIsLoggedIn(token);
+
     fetchAllJobs();
   }, []);
 
@@ -41,8 +45,33 @@ function Home() {
 
   return (
     <div className={styles.main}>
+      <div className={styles.nav}>
+        <p className={styles.navText}>Jobfinder</p>
+        <div className={styles.btnGrp}>
+          {isLoggedIn ? (
+            <button onClick={logout} className={styles.register}>
+              Logout
+            </button>
+          ) : (
+            <>
+              <button
+                className={styles.login}
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </button>
+              <button
+                className={styles.register}
+                onClick={() => navigate("/register")}
+              >
+                Register
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+
       <div className={styles.container}>
-        {!!token ? <button onClick={logout}>Logout</button> : ""}
         <div className={styles.containerTop}>
           <input
             className={styles.inputTop}
@@ -55,46 +84,60 @@ function Home() {
         </div>
 
         <div className={styles.containerBottom}>
-          <select
-            onChange={handleSkill}
-            className={styles.inputSelect}
-            name="remote"
-          >
-            <option value="">Skills</option>
-            {DEFAULT_SKILLS.map((skill) => (
-              <option key={skill} value={skill}>
-                {skill}
-              </option>
-            ))}
-          </select>
-          {skills?.map((skill) => {
-            return (
-              <span className={styles.chip} key={skill}>
-                {skill}
-                <span
-                  onClick={() => removeSkill(skill)}
-                  className={styles.cross}
-                >
-                  X
-                </span>
-              </span>
-            );
-          })}
-          <button
-            onClick={() => {
-              setSkills([]);
-              setTitle("");
-            }}
-            className={styles.edit}
-          >
-            Clear
-          </button>
-          <button onClick={fetchAllJobs} className={styles.edit}>
-            Apply Filter
-          </button>
-          <button onClick={() => navigate("/job-post")} className={styles.add}>
-            Add Job
-          </button>
+          <div>
+            <select
+              onChange={handleSkill}
+              className={styles.inputSelect}
+              name="remote"
+            >
+              <option value="">Skills</option>
+              {DEFAULT_SKILLS.map((skill) => (
+                <option key={skill} value={skill}>
+                  {skill}
+                </option>
+              ))}
+            </select>
+            <div>
+              {skills?.map((skill) => {
+                return (
+                  <span className={styles.chip} key={skill}>
+                    {skill}
+                    <span
+                      onClick={() => removeSkill(skill)}
+                      className={styles.cross}
+                    >
+                      X
+                    </span>
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <button
+              onClick={() => {
+                setSkills([]);
+                setTitle("");
+              }}
+              className={styles.edit}
+            >
+              Clear
+            </button>
+            <button onClick={fetchAllJobs} className={styles.edit}>
+              Apply Filter
+            </button>
+            {!!token ? (
+              <button
+                onClick={() => navigate("/job-post")}
+                className={styles.add}
+              >
+                Add Job
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </div>
 
@@ -104,7 +147,7 @@ function Home() {
             <div key={data._id} className={styles.list}>
               <div className={styles.listLeft}>
                 <div>
-                  <img src={data.logoUrl} />
+                  <img src={data.logoUrl} alt={data?.companyName} />
                 </div>
                 <div className={styles.infoLeft}>
                   <p className={styles.position}>{data.title}</p>
@@ -116,16 +159,11 @@ function Home() {
                   <p className={styles.extraInfo}>
                     <span className={styles.redText}>{data.locationType}</span>
                     <span className={styles.redText}>{data.jobType}</span>
-                    {/* <button
-                      onClick={() => navigate(`/job-details/${data._id}`)}
-                    >
-                      View Details
-                    </button> */}
                   </p>
                 </div>
               </div>
 
-              <div>
+              <div className={styles.listRight}>
                 <div>
                   {data?.skills?.map((skill) => {
                     return (
@@ -136,16 +174,6 @@ function Home() {
                   })}
                 </div>
                 <div className={styles.btnGroup}>
-                  {/* <button
-                                onClick={() =>
-                                    navigate("/addJob", {
-                                        state: { id: data._id, edit: true },
-                                    })
-                                }
-                                className={styles.edit}
-                            >
-                                Edit job
-                            </button> */}
                   <button
                     onClick={() => navigate(`/job-details/${data._id}`)}
                     className={styles.add}
