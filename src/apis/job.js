@@ -1,9 +1,9 @@
 import axios from "axios";
-const backendUrl = `http://localhost:4000/api/v1`;
+// const backendUrl = `http://localhost:4000/api/v1`;
 
 export const createJobPost = async (JobPostPayload) => {
   try {
-    const reqUrl = `${backendUrl}/job/create`;
+    const reqUrl = `${process.env.REACT_APP_backendUrl}/job/create`;
     const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = token;
     const response = await axios.post(reqUrl, JobPostPayload);
@@ -16,7 +16,7 @@ export const createJobPost = async (JobPostPayload) => {
 
 export const getJobPostById = async (jobPostId) => {
   try {
-    const reqUrl = `${backendUrl}/job/job-details/${jobPostId}`;
+    const reqUrl = `${process.env.REACT_APP_backendUrl}/job/job-details/${jobPostId}`;
     const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = token;
     const response = await axios.get(reqUrl);
@@ -29,7 +29,7 @@ export const getJobPostById = async (jobPostId) => {
 
 export const updateJobPostById = async (jobPostId, updatedFormData) => {
   try {
-    const reqUrl = `${backendUrl}/job/update/${jobPostId}`;
+    const reqUrl = `${process.env.REACT_APP_backendUrl}/job/update/${jobPostId}`;
     const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = token;
     const response = await axios.put(reqUrl, updatedFormData);
@@ -42,9 +42,9 @@ export const updateJobPostById = async (jobPostId, updatedFormData) => {
 
 export const getAllJobs = async (filter) => {
   try {
-    const reqUrl = `${backendUrl}/job/all?title=${filter?.title || ""}&skills=${
-      filter?.skills || ""
-    }`;
+    const reqUrl = `${process.env.REACT_APP_backendUrl}/job/all?title=${
+      filter?.title || ""
+    }&skills=${filter?.skills || ""}`;
 
     const response = await axios.get(reqUrl);
 
