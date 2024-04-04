@@ -90,7 +90,9 @@ function Home() {
               className={styles.inputSelect}
               name="remote"
             >
-              <option value="">Skills</option>
+              <option value="" disabled selected>
+                Skills
+              </option>
               {DEFAULT_SKILLS.map((skill) => (
                 <option key={skill} value={skill}>
                   {skill}

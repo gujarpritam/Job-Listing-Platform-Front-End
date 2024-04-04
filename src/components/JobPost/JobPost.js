@@ -162,7 +162,7 @@ export default function JobPost() {
             value={formData.jobType}
             onChange={handleChange}
           >
-            <option value="" disabled>
+            <option value="" disabled selected>
               Select job type
             </option>
             <option value="Full-time">Full-time</option>
@@ -180,7 +180,7 @@ export default function JobPost() {
             value={formData.locationType}
             onChange={handleChange}
           >
-            <option value="" disabled>
+            <option value="" disabled selected>
               Location Type
             </option>
             <option value="Remote">Remote</option>
@@ -238,7 +238,7 @@ export default function JobPost() {
             name="information"
             value={formData.information}
             onChange={handleChange}
-            placeholder="information"
+            placeholder="Information"
           />
         </div>
 
@@ -252,11 +252,11 @@ export default function JobPost() {
             name="skills"
             onChange={addSkills}
           >
-            <option disabled selected>
+            <option className={styles.option} disabled selected>
               Please select skills
             </option>
             {DEFAULT_SKILLS.map((element) => (
-              <option>{element}</option>
+              <option className={styles.option}>{element}</option>
             ))}
           </select>
         </div>
@@ -265,7 +265,12 @@ export default function JobPost() {
           {formData?.skills?.map((element) => (
             <div>
               {element}&nbsp;
-              <button onClick={() => removeSkill(element)}>X</button>
+              <button
+                onClick={() => removeSkill(element)}
+                className={styles.cross}
+              >
+                X
+              </button>
             </div>
           ))}
         </div>

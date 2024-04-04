@@ -57,6 +57,7 @@ body{
   color: white;
   font-weight: 600;
   border: 2px solid white;
+ cursor: pointer;
 }
 
 .bottom{
@@ -97,6 +98,7 @@ body{
 .inputSelect {
   width: 12rem;
   height: fit-content;
+  cursor: pointer;
 }
 
 .list {
@@ -166,6 +168,7 @@ body{
   padding: 0.5em 1.5em;
   color: #ED5353;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .chip {
@@ -185,4 +188,5 @@ body{
   color: white;
   height: 100%;
   box-sizing: border-box;
+  cursor: pointer;
 }

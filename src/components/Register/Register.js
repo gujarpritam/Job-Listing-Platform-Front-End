@@ -78,6 +78,7 @@ function Register() {
           onChange={(event) => setIsFormChecked(event.target.checked)}
           name="checkbox"
           id="checkbox"
+          className={styles.checkbox}
         />
         <label htmlFor="checkbox" className={styles.label}>
           By creating an account, I agree to our terms of use and privacy policy

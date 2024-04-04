@@ -69,6 +69,7 @@
   background-color: #FFFFFF;
   position: absolute;
   left: 21vw;
+  cursor: pointer;
 }
 
 .selectGroup {
@@ -86,7 +87,7 @@
   border-radius: 6.50784px;
   padding: 1em 2em;
   float: right;
-
+cursor: pointer;
   margin-right: 16px;
   color: #adadad;
 }
@@ -99,4 +100,9 @@
   color: white;
   font-weight: 600;
   float: right;
+  cursor: pointer;
+}
+
+.cross, .option{
+  cursor: pointer;
 }
