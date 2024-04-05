@@ -117,6 +117,11 @@ body{
   display: flex;
 }
 
+.companyLogo{
+  height: 2rem;
+  width: 4rem;
+}
+
 .listRight {
   display: flex;
   flex-direction: column;

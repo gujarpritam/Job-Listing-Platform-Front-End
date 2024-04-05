@@ -148,14 +148,19 @@ function Home() {
           return (
             <div key={data._id} className={styles.list}>
               <div className={styles.listLeft}>
-                <div>
-                  <img src={data.logoUrl} alt={data?.companyName} />
-                </div>
+                <img
+                  src={data.logoUrl}
+                  alt={data?.companyName}
+                  className={styles.companyLogo}
+                />
+
                 <div className={styles.infoLeft}>
                   <p className={styles.position}>{data.title}</p>
                   <p className={styles.extraInfo}>
-                    <span className={styles.greyText}>11-50</span>
-                    <span className={styles.greyText}>{data.salary}</span>
+                    {/* <span className={styles.greyText}>11-50</span> */}
+                    <span className={styles.greyText}>
+                      INR {data.salary}/ Month{" "}
+                    </span>
                     <span className={styles.greyText}>{data.location}</span>
                   </p>
                   <p className={styles.extraInfo}>
@@ -180,7 +185,7 @@ function Home() {
                     onClick={() => navigate(`/job-details/${data._id}`)}
                     className={styles.add}
                   >
-                    View Details
+                    Job Details
                   </button>
                 </div>
               </div>
