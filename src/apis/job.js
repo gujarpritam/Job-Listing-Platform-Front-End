@@ -1,5 +1,4 @@
 import axios from "axios";
-// const backendUrl = `http://localhost:4000/api/v1`;
 
 export const createJobPost = async (JobPostPayload) => {
   try {

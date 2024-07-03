@@ -17,9 +17,14 @@ function Home() {
     navigate("/login");
   };
 
+  console.log("testing");
+
   const fetchAllJobs = async () => {
     const filteredSkills = skills.join(",");
+    console.log(filteredSkills);
     console.log(typeof filteredSkills);
+
+    console.log({ title, skills: filteredSkills });
     const result = await getAllJobs({ title, skills: filteredSkills });
     setJobs(result?.data);
   };
