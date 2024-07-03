@@ -17,8 +17,6 @@ function Home() {
     navigate("/login");
   };
 
-  console.log("second testing");
-
   const fetchAllJobs = async () => {
     const filteredSkills = skills.join(",");
     console.log(typeof filteredSkills);
